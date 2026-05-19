@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SEO } from '@/components/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useContent } from '@/context/ContentContext';
 import { ArrowRight, X, Heart, MessageCircle, Send, Bookmark, MoreHorizontal, CheckCheck, Smile, Image, Mic, ChevronRight, TrendingUp, Users, Eye, Share2 } from 'lucide-react';
 import { Link } from 'wouter';
 
@@ -583,7 +584,22 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 /* ── Main page ───────────────────────────────────────────── */
 
 const Work = () => {
+  const { content } = useContent();
   const [selected, setSelected] = useState<Project | null>(null);
+
+  const mergedProjects: Project[] = projects.map((p, i) => {
+    const w = content.work[i];
+    if (!w) return p;
+    return {
+      ...p,
+      name: w.name,
+      handle: w.handle,
+      metrics: w.metrics,
+      stat: w.stat,
+      tagline: w.tagline,
+      results: w.results,
+    };
+  });
 
   return (
     <motion.div
@@ -654,7 +670,7 @@ const Work = () => {
         <div className="container mx-auto">
           <p className="text-center text-gray-400 text-xs uppercase tracking-widest mb-12">Click any conversation to see what happened inside</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, i) => (
+            {mergedProjects.map((project, i) => (
               <motion.div
                 key={project.name}
                 className="group cursor-pointer rounded-2xl overflow-hidden border border-black/8 hover:shadow-xl transition-all duration-500 bg-white"

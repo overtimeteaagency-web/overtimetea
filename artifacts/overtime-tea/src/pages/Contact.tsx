@@ -1,6 +1,7 @@
 import React from 'react';
 import { SEO } from '@/components/SEO';
 import { motion } from 'framer-motion';
+import { useContent } from '@/context/ContentContext';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -21,6 +22,8 @@ const formSchema = z.object({
 });
 
 const Contact = () => {
+  const { content } = useContent();
+  const c = content.contact;
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,10 +68,10 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#121212] mb-6 leading-tight">
-                Let's brew something <span className="italic text-[#B88A44]">people remember.</span>
+                {c.heroHeadline1} <span className="italic text-[#B88A44]">{c.heroHeadline2}</span>
               </h1>
               <p className="text-xl text-black/60 mb-12 font-light">
-                Because strong brands are never rushed.
+                {c.heroSubtext}
               </p>
 
               <div className="mb-12">
@@ -231,14 +234,14 @@ const Contact = () => {
             >
               <p className="text-xs uppercase tracking-[0.25em] text-[#B88A44] mb-5">Who we are</p>
               <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight mb-6">
-                We're not an agency.<br />
-                <span className="italic text-[#B88A44]">We're a brewing house.</span>
+                {c.aboutHeadline1}<br />
+                <span className="italic text-[#B88A44]">{c.aboutHeadline2}</span>
               </h2>
               <p className="text-[#F6F1E8]/60 text-lg font-light leading-relaxed mb-6">
-                Founded in 2020 over a late-night cup of tea, Overtime Tea was built on one belief — that social media deserved more than scheduled posts and vanity metrics. It deserved craft.
+                {c.aboutText1}
               </p>
               <p className="text-[#F6F1E8]/60 text-lg font-light leading-relaxed">
-                Today we work with 50+ brands across lifestyle, food, fashion, and wellness — building digital presence that actually feels like something.
+                {c.aboutText2}
               </p>
             </motion.div>
 
@@ -250,10 +253,10 @@ const Contact = () => {
               className="grid grid-cols-2 gap-4"
             >
               {[
-                { stat: '50+', label: 'Brands served' },
-                { stat: '2M+', label: 'Content views' },
-                { stat: '5 yrs', label: 'In the brew' },
-                { stat: '100%', label: 'Transparency' },
+                { stat: c.stat1, label: c.stat1Label },
+                { stat: c.stat2, label: c.stat2Label },
+                { stat: c.stat3, label: c.stat3Label },
+                { stat: c.stat4, label: c.stat4Label },
               ].map(({ stat, label }) => (
                 <div
                   key={label}

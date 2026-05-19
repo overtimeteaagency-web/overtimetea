@@ -3,70 +3,20 @@ import { SEO } from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { useContent } from '@/context/ContentContext';
+
+const serviceStyles = [
+  { bg: 'bg-[#121212]', text: 'text-[#F6F1E8]', accent: 'text-[#B88A44]' },
+  { bg: 'bg-[#F6F1E8]', text: 'text-[#121212]', accent: 'text-[#4B3124]' },
+  { bg: 'bg-[#4B3124]', text: 'text-[#F6F1E8]', accent: 'text-[#D8C2A8]' },
+  { bg: 'bg-[#121212]', text: 'text-[#F6F1E8]', accent: 'text-[#B88A44]' },
+  { bg: 'bg-[#F6F1E8]', text: 'text-[#121212]', accent: 'text-[#5E6B52]' },
+  { bg: 'bg-[#121212]', text: 'text-[#F6F1E8]', accent: 'text-[#B88A44]' },
+];
 
 const Services = () => {
-  const services = [
-    {
-      num: "01",
-      title: "Social Media Management",
-      tagline: "Your brand's daily voice, crafted with intention.",
-      desc: "Full-scale ecosystem management. We don't just post; we build community, drive engagement, and translate your brand values into daily interactions.",
-      deliverables: ["Platform Strategy & Management", "Community Engagement", "Copywriting & Tone of Voice", "Growth Tracking", "Monthly Reporting"],
-      bg: "bg-[#121212]",
-      text: "text-[#F6F1E8]",
-      accent: "text-[#B88A44]"
-    },
-    {
-      num: "02",
-      title: "Content Strategy",
-      tagline: "Every post is a chapter in your brand's story.",
-      desc: "Data-informed content pillars that provide a roadmap for everything you publish. We eliminate the guesswork from your feed.",
-      deliverables: ["Audience Persona Research", "Content Pillar Development", "Competitor Analysis", "Editorial Calendars", "Campaign Ideation"],
-      bg: "bg-[#F6F1E8]",
-      text: "text-[#121212]",
-      accent: "text-[#4B3124]"
-    },
-    {
-      num: "03",
-      title: "Reels & Short Form",
-      tagline: "Stop the scroll. Start the conversation.",
-      desc: "High-retention vertical video engineered for algorithmic success. We script, shoot, and edit videos that capture attention in the critical first 3 seconds.",
-      deliverables: ["Concept & Scripting", "Video Editing & Production", "Trend Adaptation", "Music Licensing", "Hook Optimization"],
-      bg: "bg-[#4B3124]",
-      text: "text-[#F6F1E8]",
-      accent: "text-[#D8C2A8]"
-    },
-    {
-      num: "04",
-      title: "Creative Direction",
-      tagline: "The vision behind everything your brand puts out.",
-      desc: "Building a cohesive visual language. We ensure that no matter the platform, your brand looks unmistakably premium and recognizable.",
-      deliverables: ["Visual Identity Systems", "Mood Boards & Aesthetics", "Brand Guidelines", "Photoshoot Direction", "Campaign Art Direction"],
-      bg: "bg-[#121212]",
-      text: "text-[#F6F1E8]",
-      accent: "text-[#B88A44]"
-    },
-    {
-      num: "05",
-      title: "Brand Presence Building",
-      tagline: "From unknown to unforgettable.",
-      desc: "Establishing a commanding digital footprint from the ground up. Perfect for new brands or established companies needing a digital refresh.",
-      deliverables: ["Profile Optimization", "Cross-Platform Consistency", "Bio & Link Strategy", "Highlight Cover Design", "Launch Campaigns"],
-      bg: "bg-[#F6F1E8]",
-      text: "text-[#121212]",
-      accent: "text-[#5E6B52]"
-    },
-    {
-      num: "06",
-      title: "Content Planning",
-      tagline: "Never run out of ideas. Never miss a moment.",
-      desc: "Meticulous organization of your content flow. We balance real-time trend reaction with evergreen storytelling.",
-      deliverables: ["Monthly Content Calendars", "Seasonal Campaigns", "Content Batching Systems", "Asset Organization", "Publishing Schedules"],
-      bg: "bg-[#121212]",
-      text: "text-[#F6F1E8]",
-      accent: "text-[#B88A44]"
-    }
-  ];
+  const { content } = useContent();
+  const services = content.services.map((s, i) => ({ ...s, ...serviceStyles[i] }));
 
   return (
     <motion.div

@@ -3,6 +3,7 @@ import { SEO } from '@/components/SEO';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
+import { useContent } from '@/context/ContentContext';
 
 /* ── Step data ─────────────────────────────────────────── */
 const steps = [
@@ -366,7 +367,10 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
 }
 
 /* ── Page ─────────────────────────────────────────────── */
-const Process = () => (
+const Process = () => {
+  const { content } = useContent();
+  const steps = content.process;
+  return (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -538,6 +542,7 @@ const Process = () => (
       </div>
     </section>
   </motion.div>
-);
+  );
+};
 
 export default Process;

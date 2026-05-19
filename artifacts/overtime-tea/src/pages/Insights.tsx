@@ -3,52 +3,11 @@ import { SEO } from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { useContent } from '@/context/ContentContext';
 
 const Insights = () => {
-  const posts = [
-    { 
-      title: "People don't remember content. They remember how brands made them feel.", 
-      excerpt: "On emotional branding and why feeling > reach when building long-term recall.",
-      date: "Oct 12", 
-      read: "4 min read",
-      category: "Brand Strategy"
-    },
-    { 
-      title: "Good branding is never rushed.", 
-      excerpt: "Why slow, intentional brand building beats trend-chasing in the modern social landscape.",
-      date: "Sep 28", 
-      read: "6 min read",
-      category: "Creative Direction"
-    },
-    { 
-      title: "The best conversations stay longer than trends.", 
-      excerpt: "Building evergreen brand recall instead of relying solely on viral moments.",
-      date: "Sep 15", 
-      read: "5 min read",
-      category: "Content Strategy"
-    },
-    { 
-      title: "Why your Instagram grid isn't your brand — but it is your first impression.", 
-      excerpt: "On visual identity, profile aesthetics, and the balance between curation and reality.",
-      date: "Aug 30", 
-      read: "4 min read",
-      category: "Social Media"
-    },
-    { 
-      title: "Reels changed everything. Here's what most brands still get wrong.", 
-      excerpt: "A deep dive into short-form content strategy and the 3-second hook.",
-      date: "Aug 12", 
-      read: "7 min read",
-      category: "Reels & Short Form"
-    },
-    { 
-      title: "The most underrated social media strategy: just being genuinely interesting.", 
-      excerpt: "On authenticity, brand voice, and creating content that actually connects.",
-      date: "Jul 25", 
-      read: "5 min read",
-      category: "Community"
-    },
-  ];
+  const { content } = useContent();
+  const posts = content.insights;
 
   return (
     <motion.div
