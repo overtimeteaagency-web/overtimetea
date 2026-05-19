@@ -219,8 +219,76 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Who We Are */}
+      <section className="py-24 px-6 bg-[#121212] text-[#F6F1E8]">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <p className="text-xs uppercase tracking-[0.25em] text-[#B88A44] mb-5">Who we are</p>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight mb-6">
+                We're not an agency.<br />
+                <span className="italic text-[#B88A44]">We're a brewing house.</span>
+              </h2>
+              <p className="text-[#F6F1E8]/60 text-lg font-light leading-relaxed mb-6">
+                Founded in 2020 over a late-night cup of tea, Overtime Tea was built on one belief — that social media deserved more than scheduled posts and vanity metrics. It deserved craft.
+              </p>
+              <p className="text-[#F6F1E8]/60 text-lg font-light leading-relaxed">
+                Today we work with 50+ brands across lifestyle, food, fashion, and wellness — building digital presence that actually feels like something.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              {[
+                { stat: '50+', label: 'Brands served' },
+                { stat: '2M+', label: 'Content views' },
+                { stat: '5 yrs', label: 'In the brew' },
+                { stat: '100%', label: 'Transparency' },
+              ].map(({ stat, label }) => (
+                <div
+                  key={label}
+                  className="border border-white/10 rounded-2xl p-8 flex flex-col gap-2 hover:border-[#B88A44]/40 transition-colors duration-300"
+                >
+                  <span className="text-4xl font-serif font-bold text-[#B88A44]">{stat}</span>
+                  <span className="text-sm uppercase tracking-widest text-[#F6F1E8]/50">{label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 pt-16 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              { title: 'Overtime is a mindset.', desc: "We don't count hours. We count the care put into every post, every brief, every conversation." },
+              { title: 'Strategy before aesthetics.', desc: 'A beautiful feed with no strategy is just a pretty void. We build the why before the what.' },
+              { title: 'Honest results always.', desc: "We tell you what's working and what isn't. Transparency isn't a perk — it's how we work." },
+            ].map(({ title, desc }) => (
+              <div key={title}>
+                <h4 className="font-serif text-lg text-[#F6F1E8] mb-2">{title}</h4>
+                <p className="text-[#F6F1E8]/50 text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
-      <section className="py-20 px-6 bg-[#121212] text-[#F6F1E8]">
+      <section className="py-20 px-6 bg-[#F6F1E8] text-[#121212]">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Frequently Asked</h2>

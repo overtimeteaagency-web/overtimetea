@@ -12,7 +12,6 @@ import Process from "@/pages/Process";
 import Work from "@/pages/Work";
 import Insights from "@/pages/Insights";
 import Contact from "@/pages/Contact";
-import About from "@/pages/About";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -25,7 +24,6 @@ function Router() {
       <Route path="/process" component={Process} />
       <Route path="/work" component={Work} />
       <Route path="/insights" component={Insights} />
-      <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
