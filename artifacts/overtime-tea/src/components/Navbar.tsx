@@ -5,10 +5,11 @@ import { Menu, X } from 'lucide-react';
 
 const links = [
   { name: 'Home', href: '/', num: '01' },
-  { name: "What We're Brewing", href: '/services', num: '02' },
-  { name: 'The Overtime Method', href: '/process', num: '03' },
-  { name: 'Conversations', href: '/work', num: '04' },
-  { name: 'Thoughts', href: '/insights', num: '05' },
+  { name: 'About Us', href: '/about', num: '02' },
+  { name: "What We're Brewing", href: '/services', num: '03' },
+  { name: 'The Overtime Method', href: '/process', num: '04' },
+  { name: 'Conversations', href: '/work', num: '05' },
+  { name: 'Thoughts', href: '/insights', num: '06' },
 ];
 
 export const Navbar = () => {
