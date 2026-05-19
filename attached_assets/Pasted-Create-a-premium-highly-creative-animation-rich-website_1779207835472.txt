@@ -1,0 +1,368 @@
+Create a premium, highly creative, animation-rich website for a social media management agency called “Overtime Tea ☕”.
+
+The website should NOT feel like a generic digital marketing agency.
+It should feel like a modern creative brand studio built around conversations, strategy, culture, and extra effort.
+
+CORE BRAND IDEA:
+“Good conversations start over tea.”
+“Great brands are brewed overtime.”
+
+The entire experience should feel:
+- warm
+- premium
+- cinematic
+- modern
+- conversational
+- thoughtful
+- editorial
+- immersive
+- calm but memorable
+
+Avoid:
+- corporate agency style
+- generic gradients
+- overused startup layouts
+- loud neon aesthetics
+- basic templates
+- stock-marketing visuals
+
+━━━━━━━━━━━━━━━
+BRAND DETAILS
+━━━━━━━━━━━━━━━
+
+Brand Name:
+Overtime Tea ☕
+
+Tagline:
+Brewed overtime for better conversations.
+
+Core Principle:
+RIO — Results, Inside & Out.
+
+Brand Personality:
+- Creative
+- Strategic
+- Human
+- Culture-driven
+- Detail-oriented
+- Calm confidence
+- Premium but approachable
+
+The meaning behind the brand:
+Tea represents conversations and connection.
+Overtime represents extra effort, attention to detail, dedication, and going beyond expectations.
+
+The website should visually communicate:
+“We put more thought into branding than typical agencies.”
+
+━━━━━━━━━━━━━━━
+COLOR PALETTE
+━━━━━━━━━━━━━━━
+
+Use colors inspired by a premium tea-house aesthetic and the logo.
+
+Primary:
+- Warm Cream (#F6F1E8)
+- Matte Black (#121212)
+- Deep Coffee Brown (#4B3124)
+
+Secondary:
+- Soft Beige (#D8C2A8)
+- Muted Olive Green (#5E6B52)
+
+Accent:
+- Warm Gold (#B88A44)
+
+The site should feel elegant and warm, not flashy.
+
+━━━━━━━━━━━━━━━
+TYPOGRAPHY
+━━━━━━━━━━━━━━━
+
+Headings:
+Elegant editorial serif font
+Example feel:
+- Playfair Display
+- Cormorant Garamond
+- Canela-inspired
+
+Body:
+Modern clean sans-serif
+Example:
+- Plus Jakarta Sans
+- Inter
+- Satoshi
+
+Typography should feel:
+luxury editorial + modern UI.
+
+━━━━━━━━━━━━━━━
+WEBSITE STYLE
+━━━━━━━━━━━━━━━
+
+The website should feel like:
+- a creative journal
+- a modern tea house
+- a premium branding studio
+- a cinematic social media agency
+
+Use:
+- smooth scroll animations
+- parallax effects
+- hover interactions
+- soft fade-ins
+- cinematic reveal animations
+- floating particles/steam effects
+- smooth section transitions
+- premium motion design
+
+Animation inspiration:
+The experience should feel like tea slowly brewing:
+- smooth
+- intentional
+- layered
+- immersive
+
+Microinteractions should feel refined and luxurious.
+
+━━━━━━━━━━━━━━━
+NAVBAR
+━━━━━━━━━━━━━━━
+
+Sticky transparent navbar with blur effect.
+
+Navbar Items:
+- Home
+- What We’re Brewing
+- The Overtime Method
+- Conversations We’ve Started
+- Tea Break Thoughts
+- Start A Conversation
+
+Navbar animation:
+- smooth underline hover
+- subtle liquid motion
+- premium transitions
+
+━━━━━━━━━━━━━━━
+HERO SECTION
+━━━━━━━━━━━━━━━
+
+Full-screen cinematic hero section.
+
+Background:
+- soft moving steam/smoke effect
+- subtle floating tea particles
+- warm textured gradients
+- cinematic lighting
+
+Hero Text:
+“Brewed overtime for better conversations.”
+
+Subtext:
+“We help brands turn content into conversations through strategy, storytelling, and overtime-level creative effort.”
+
+CTA Buttons:
+- Start A Conversation
+- See What We’re Brewing
+
+Hero Visual Ideas:
+- floating tea cup made from abstract shapes
+- liquid morphing animations
+- cinematic typography reveal
+- subtle ripple interactions
+
+Scrolling indicator:
+animated tea drop / steam icon.
+
+━━━━━━━━━━━━━━━
+SECTION 2 — WHAT WE’RE BREWING
+━━━━━━━━━━━━━━━
+
+Instead of generic service cards, create immersive storytelling cards.
+
+Services:
+- Social Media Management
+- Content Strategy
+- Reels & Short Form
+- Creative Direction
+- Brand Presence Building
+- Content Planning
+
+Each card should:
+- animate on hover
+- reveal hidden details
+- have liquid motion
+- feel editorial and interactive
+
+Add small metaphorical lines:
+“Steeped in strategy.”
+“Served with creativity.”
+“Built with overtime effort.”
+
+━━━━━━━━━━━━━━━
+SECTION 3 — THE OVERTIME METHOD
+━━━━━━━━━━━━━━━
+
+Create a visually stunning horizontal storytelling process timeline.
+
+Steps:
+1. Steep
+Understanding the brand, audience, and story.
+
+2. Brew
+Building strategy and creative direction.
+
+3. Pour
+Designing engaging content and experiences.
+
+4. Stir
+Creating conversations and audience connection.
+
+5. Serve
+Delivering memorable brand presence and results.
+
+Each step should animate beautifully as users scroll.
+Use:
+- steam transitions
+- liquid line animations
+- warm glowing highlights
+
+━━━━━━━━━━━━━━━
+SECTION 4 — CONVERSATIONS WE’VE STARTED
+━━━━━━━━━━━━━━━
+
+Portfolio / Case Study section.
+
+Instead of “Projects”:
+Call them:
+“Conversations We’ve Started”
+
+Each project should show:
+- brand identity
+- social media creatives
+- reels preview
+- growth impact
+- engagement metrics
+
+Hover effects:
+- cinematic zoom
+- soft blur reveal
+- animated overlays
+
+Make it feel like an art gallery.
+
+━━━━━━━━━━━━━━━
+SECTION 5 — TEA BREAK THOUGHTS
+━━━━━━━━━━━━━━━
+
+Creative insights/blog section.
+
+Card titles examples:
+- “People don’t remember content. They remember how brands made them feel.”
+- “Good branding is never rushed.”
+- “The best conversations stay longer than trends.”
+
+Cards should feel:
+- editorial
+- magazine-inspired
+- modern and clean
+
+━━━━━━━━━━━━━━━
+SECTION 6 — WHY OVERTIME TEA
+━━━━━━━━━━━━━━━
+
+Create an emotional positioning section.
+
+Headline:
+“Most agencies manage pages.
+We build conversations.”
+
+Explain:
+- strategy-first approach
+- overtime-level attention to detail
+- culture-aware branding
+- emotionally engaging content
+- building recall, not just reach
+
+Use animated counters and elegant motion.
+
+━━━━━━━━━━━━━━━
+SECTION 7 — TESTIMONIALS
+━━━━━━━━━━━━━━━
+
+Make testimonials feel cinematic.
+
+Use:
+- floating review cards
+- glassmorphism
+- subtle steam effects
+- smooth carousel transitions
+
+━━━━━━━━━━━━━━━
+FINAL CTA SECTION
+━━━━━━━━━━━━━━━
+
+Large cinematic CTA.
+
+Headline:
+“Let’s brew something people remember.”
+
+Subtext:
+“Because strong brands are never rushed.”
+
+CTA Button:
+“Start A Conversation”
+
+Background:
+- slow moving steam
+- warm glow lighting
+- premium animated textures
+
+━━━━━━━━━━━━━━━
+FOOTER
+━━━━━━━━━━━━━━━
+
+Minimal luxury footer.
+
+Include:
+- navigation
+- social icons
+- email:
+overtimeteaagency@gmail.com
+
+Footer line:
+“Brewed overtime for better conversations.”
+
+━━━━━━━━━━━━━━━
+EXTRA UI DETAILS
+━━━━━━━━━━━━━━━
+
+Add:
+- custom cursor
+- smooth scrolling
+- loading animation with tea brewing effect
+- animated steam dividers
+- liquid-inspired transitions
+- premium hover sounds optional
+- scroll progress indicator
+
+The entire website should feel:
+“crafted with overtime effort.”
+
+━━━━━━━━━━━━━━━
+TECH + UI REQUIREMENTS
+━━━━━━━━━━━━━━━
+
+- Fully responsive
+- Mobile-first optimized
+- Modern React/Next.js style
+- Tailwind CSS aesthetic
+- Framer Motion animations
+- High performance
+- Luxury UI spacing
+- Smooth interactions
+- SEO optimized
+- Accessibility friendly
+
+The final result should feel like a world-class creative agency website, emotionally immersive, strategically designed, and visually unforgettable.

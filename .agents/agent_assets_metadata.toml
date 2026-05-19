@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "5aEqnSJeT2ltgR0Dha-92"
+uri = "file://artifacts/overtime-tea/public/images/hero.png"
+type = "image"
+title = "Cinematic tea house atmosphere"
+
+[[generated]]
+id = "AbO7-l622Vw8YNJ_JgA2w"
+uri = "file://artifacts/overtime-tea/public/images/vessel-coffee.png"
+type = "image"
+title = "Vessel Coffee brand showcase"
+
+[[generated]]
+id = "aMGkf1B4caTx6oHuLuQUw"
+uri = "file://artifacts/overtime-tea/public/images/hum-studio.png"
+type = "image"
+title = "Hum Studio brand showcase"
