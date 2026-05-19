@@ -29,17 +29,19 @@ export const Navbar = () => {
 
   const isHome = location === '/';
 
+  const textLight = !scrolled;
+
   return (
     <>
       <motion.nav
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-background/40 backdrop-blur-xl py-4 shadow-sm border-b border-foreground/5' : 'bg-transparent py-6'}`}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#121212]/80 backdrop-blur-xl py-4 shadow-sm border-b border-white/10' : 'bg-gradient-to-b from-black/50 to-transparent py-6'}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-serif font-bold tracking-wider text-foreground flex items-center gap-2 z-50 relative">
-            Overtime Tea <span className="text-xl text-[#B88A44]">☕</span>
+          <Link href="/" className="text-2xl font-serif font-bold tracking-wider z-50 relative" style={{ color: '#F6F1E8' }}>
+            Overtime Tea
           </Link>
 
           {/* Desktop Nav */}
@@ -50,7 +52,8 @@ export const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-sm uppercase tracking-widest font-medium transition-colors relative group py-2 flex items-start gap-1 ${isActive ? 'text-[#B88A44]' : 'text-foreground hover:text-[#B88A44]'}`}
+                  className={`text-sm uppercase tracking-widest font-medium transition-colors relative group py-2 flex items-start gap-1 ${isActive ? 'text-[#B88A44]' : 'hover:text-[#B88A44]'}`}
+                  style={{ color: isActive ? '#B88A44' : '#F6F1E8' }}
                 >
                   <span className="opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 text-[10px] text-[#B88A44] transition-all absolute -top-1 -right-4 font-sans font-bold">
                     {link.num}
@@ -71,7 +74,8 @@ export const Navbar = () => {
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden relative z-50 text-foreground"
+            className="lg:hidden relative z-50"
+            style={{ color: '#F6F1E8' }}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
