@@ -30,10 +30,10 @@ const Services = () => {
         description="From social media management to reels, creative direction, and content strategy — discover how Overtime Tea brews results for your brand." 
       />
 
-      <section className="pt-40 pb-32 px-6 border-b border-white/10">
+      <section className="pt-28 md:pt-40 pb-16 md:pb-32 px-4 md:px-6 border-b border-white/10">
         <div className="container mx-auto">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-[9rem] font-serif font-bold text-[#F6F1E8] mb-6 leading-none tracking-tight"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-[9rem] font-serif font-bold text-[#F6F1E8] mb-6 leading-none tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -53,10 +53,10 @@ const Services = () => {
 
       <div>
         {services.map((service, i) => (
-          <section key={service.num} className={`${service.bg} ${service.text} py-32 px-6 relative overflow-hidden`}>
+          <section key={service.num} className={`${service.bg} ${service.text} py-16 md:py-32 px-4 md:px-6 relative overflow-hidden`}>
             <div className="container mx-auto">
               <motion.div 
-                className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -71,9 +71,9 @@ const Services = () => {
 
                 {/* Content */}
                 <div className="lg:col-span-8 z-10">
-                  <h2 className="text-5xl md:text-7xl font-serif font-bold mb-6">{service.title}</h2>
-                  <h3 className={`text-2xl font-light mb-8 ${service.accent}`}>{service.tagline}</h3>
-                  <p className="text-xl opacity-80 max-w-2xl mb-12 leading-relaxed">
+                  <h2 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold mb-4 md:mb-6">{service.title}</h2>
+                  <h3 className={`text-lg sm:text-2xl font-light mb-6 md:mb-8 ${service.accent}`}>{service.tagline}</h3>
+                  <p className="text-base sm:text-xl opacity-80 max-w-2xl mb-8 md:mb-12 leading-relaxed">
                     {service.desc}
                   </p>
 

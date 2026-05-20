@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'wouter';
 import { Menu, X } from 'lucide-react';
+import { useContent } from '@/context/ContentContext';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -15,6 +16,8 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { content } = useContent();
+  const { brandName, logoUrl } = content.global;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -40,14 +43,20 @@ export const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <div className="container mx-auto px-6 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-2xl font-serif font-bold tracking-wider z-50 relative"
-            style={{ color: '#F6F1E8' }}
-          >
-            Overtime Tea
+          <Link href="/" className="flex items-center z-50 relative" style={{ color: '#F6F1E8' }}>
+            {logoUrl ? (
+              <img
+                src={logoUrl}
+                alt={brandName}
+                className="h-8 md:h-10 w-auto object-contain max-w-[140px] md:max-w-[180px]"
+              />
+            ) : (
+              <span className="text-xl md:text-2xl font-serif font-bold tracking-wider">
+                {brandName}
+              </span>
+            )}
           </Link>
 
           {/* Desktop Nav */}
@@ -83,7 +92,7 @@ export const Navbar = () => {
 
           {/* Mobile Toggle */}
           <button
-            className="lg:hidden relative z-50"
+            className="lg:hidden relative z-50 p-1"
             style={{ color: '#F6F1E8' }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
@@ -96,7 +105,7 @@ export const Navbar = () => {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {menuOpen ? <X size={28} /> : <Menu size={28} />}
+                {menuOpen ? <X size={26} /> : <Menu size={26} />}
               </motion.div>
             </AnimatePresence>
           </button>
@@ -135,19 +144,19 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-[#121212] flex flex-col justify-center items-center"
+            className="fixed inset-0 z-40 bg-[#121212] flex flex-col justify-center items-center px-6"
           >
-            <div className="flex flex-col gap-8 text-center">
+            <div className="flex flex-col gap-6 md:gap-8 text-center w-full max-w-sm">
               {links.map((link, i) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 + 0.2 }}
+                  transition={{ delay: i * 0.08 + 0.2 }}
                 >
                   <Link
                     href={link.href}
-                    className={`text-4xl font-serif transition-colors ${
+                    className={`text-3xl md:text-4xl font-serif transition-colors block ${
                       location === link.href ? 'text-[#B88A44]' : 'text-[#F6F1E8] hover:text-[#B88A44]'
                     }`}
                   >
@@ -158,12 +167,12 @@ export const Navbar = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: links.length * 0.1 + 0.2 }}
-                className="mt-8"
+                transition={{ delay: links.length * 0.08 + 0.2 }}
+                className="mt-4"
               >
                 <Link
                   href="/contact"
-                  className="px-8 py-4 border border-[#B88A44] text-[#B88A44] rounded-full text-lg uppercase tracking-widest hover:bg-[#B88A44] hover:text-white transition-all duration-300"
+                  className="inline-block px-8 py-4 border border-[#B88A44] text-[#B88A44] rounded-full text-base uppercase tracking-widest hover:bg-[#B88A44] hover:text-white transition-all duration-300"
                 >
                   Start A Conversation
                 </Link>

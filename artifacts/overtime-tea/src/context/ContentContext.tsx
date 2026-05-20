@@ -48,6 +48,7 @@ export interface WorkProject {
 export interface SiteContent {
   global: {
     brandName: string;
+    logoUrl: string;
     email: string;
     instagramUrl: string;
     linkedinUrl: string;
@@ -94,9 +95,10 @@ export interface SiteContent {
 
 /* ── Defaults ───────────────────────────────────────────── */
 
-const defaultContent: SiteContent = {
+export const defaultContent: SiteContent = {
   global: {
     brandName: 'Overtime Tea',
+    logoUrl: '',
     email: 'overtimeteaagency@gmail.com',
     instagramUrl: '#',
     linkedinUrl: '#',
@@ -286,39 +288,86 @@ const defaultContent: SiteContent = {
   },
 };
 
+/* ── Deep merge helper ──────────────────────────────────── */
+
+function deepMerge<T>(defaults: T, overrides: Partial<T>): T {
+  if (typeof defaults !== 'object' || defaults === null) return (overrides ?? defaults) as T;
+  const result = { ...defaults };
+  for (const key in overrides) {
+    const k = key as keyof T;
+    const ov = overrides[k];
+    if (ov !== undefined && ov !== null) {
+      if (typeof defaults[k] === 'object' && !Array.isArray(defaults[k]) && typeof ov === 'object' && !Array.isArray(ov)) {
+        result[k] = deepMerge(defaults[k] as object, ov as object) as T[typeof k];
+      } else {
+        result[k] = ov as T[typeof k];
+      }
+    }
+  }
+  return result;
+}
+
 /* ── Context ────────────────────────────────────────────── */
 
 interface ContentContextType {
   content: SiteContent;
-  updateContent: (next: SiteContent) => void;
+  updateContent: (next: SiteContent) => Promise<void>;
   resetContent: () => void;
+  loading: boolean;
 }
 
 const ContentContext = createContext<ContentContextType | null>(null);
 
-const STORAGE_KEY = 'ot_site_content_v1';
+const STORAGE_KEY = 'ot_site_content_v2';
 
 export const ContentProvider = ({ children }: { children: React.ReactNode }) => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return { ...defaultContent, ...JSON.parse(stored) };
+      if (stored) return deepMerge(defaultContent, JSON.parse(stored));
     } catch {}
     return defaultContent;
   });
+  const [loading, setLoading] = useState(true);
 
-  const updateContent = (next: SiteContent) => {
+  useEffect(() => {
+    fetch('/api/admin/content')
+      .then((r) => r.json())
+      .then((json: { data: Partial<SiteContent> | null }) => {
+        if (json.data) {
+          const merged = deepMerge(defaultContent, json.data);
+          setContent(merged);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  const updateContent = async (next: SiteContent) => {
     setContent(next);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    try {
+      await fetch('/api/admin/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: next }),
+      });
+    } catch {}
   };
 
   const resetContent = () => {
     setContent(defaultContent);
     localStorage.removeItem(STORAGE_KEY);
+    fetch('/api/admin/content', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: defaultContent }),
+    }).catch(() => {});
   };
 
   return (
-    <ContentContext.Provider value={{ content, updateContent, resetContent }}>
+    <ContentContext.Provider value={{ content, updateContent, resetContent, loading }}>
       {children}
     </ContentContext.Provider>
   );
@@ -329,5 +378,3 @@ export const useContent = () => {
   if (!ctx) throw new Error('useContent must be used within ContentProvider');
   return ctx;
 };
-
-export { defaultContent };

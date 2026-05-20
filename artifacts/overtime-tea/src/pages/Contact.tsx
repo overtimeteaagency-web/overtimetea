@@ -57,9 +57,9 @@ const Contact = () => {
         description="Ready to brew something unforgettable? Get in touch with Overtime Tea and let's build your brand's social media presence together." 
       />
 
-      <section className="pt-40 pb-20 px-6">
+      <section className="pt-28 md:pt-40 pb-12 md:pb-20 px-4 md:px-6">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24">
             
             {/* Left Col - Info */}
             <motion.div 
@@ -67,10 +67,10 @@ const Contact = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#121212] mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold text-[#121212] mb-6 leading-tight">
                 {c.heroHeadline1} <span className="italic text-[#B88A44]">{c.heroHeadline2}</span>
               </h1>
-              <p className="text-xl text-black/60 mb-12 font-light">
+              <p className="text-base sm:text-xl text-black/60 mb-8 md:mb-12 font-light">
                 {c.heroSubtext}
               </p>
 
@@ -122,7 +122,7 @@ const Contact = () => {
 
             {/* Right Col - Form */}
             <motion.div 
-              className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-black/5"
+              className="bg-white p-6 sm:p-8 md:p-12 rounded-2xl shadow-sm border border-black/5"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
@@ -223,9 +223,9 @@ const Contact = () => {
       </section>
 
       {/* Who We Are */}
-      <section className="py-24 px-6 bg-[#121212] text-[#F6F1E8]">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-[#121212] text-[#F6F1E8]">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -260,7 +260,7 @@ const Contact = () => {
               ].map(({ stat, label }) => (
                 <div
                   key={label}
-                  className="border border-white/10 rounded-2xl p-8 flex flex-col gap-2 hover:border-[#B88A44]/40 transition-colors duration-300"
+                  className="border border-white/10 rounded-2xl p-5 md:p-8 flex flex-col gap-2 hover:border-[#B88A44]/40 transition-colors duration-300"
                 >
                   <span className="text-4xl font-serif font-bold text-[#B88A44]">{stat}</span>
                   <span className="text-sm uppercase tracking-widest text-[#F6F1E8]/50">{label}</span>
@@ -291,7 +291,7 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-6 bg-[#F6F1E8] text-[#121212]">
+      <section className="py-12 md:py-20 px-4 md:px-6 bg-[#F6F1E8] text-[#121212]">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Frequently Asked</h2>

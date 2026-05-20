@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent, SiteContent, defaultContent } from '@/context/ContentContext';
-import { LogOut, Save, RotateCcw, ChevronDown, ChevronUp, Eye, EyeOff, Lock, User } from 'lucide-react';
+import {
+  LogOut, Save, RotateCcw, ChevronDown, ChevronUp, Eye, EyeOff, Lock, User,
+  Upload, Trash2, Copy, Check, ImageIcon, Star,
+} from 'lucide-react';
 
 /* ── Auth ───────────────────────────────────────────────── */
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'OvertimeTea@2025';
+
+/* ── Types ──────────────────────────────────────────────── */
+interface SiteImage {
+  id: number;
+  filename: string;
+  originalName: string;
+  url: string;
+  label: string;
+  createdAt: string;
+}
 
 /* ── Small helpers ──────────────────────────────────────── */
 const Field = ({
@@ -119,46 +132,12 @@ const ServicesTab = ({ draft, setDraft }: { draft: SiteContent; setDraft: (d: Si
     <div className="flex flex-col gap-4">
       {draft.services.map((svc, i) => (
         <Section key={i} title={`${svc.num}. ${svc.title}`}>
-          <Field
-            label="Title"
-            value={svc.title}
-            onChange={(v) => {
-              const next = [...draft.services];
-              next[i] = { ...next[i], title: v };
-              setDraft({ ...draft, services: next });
-            }}
-          />
-          <Field
-            label="Tagline"
-            value={svc.tagline}
-            onChange={(v) => {
-              const next = [...draft.services];
-              next[i] = { ...next[i], tagline: v };
-              setDraft({ ...draft, services: next });
-            }}
-          />
-          <Field
-            label="Description"
-            value={svc.desc}
-            onChange={(v) => {
-              const next = [...draft.services];
-              next[i] = { ...next[i], desc: v };
-              setDraft({ ...draft, services: next });
-            }}
-            multiline
-          />
+          <Field label="Title" value={svc.title} onChange={(v) => { const next = [...draft.services]; next[i] = { ...next[i], title: v }; setDraft({ ...draft, services: next }); }} />
+          <Field label="Tagline" value={svc.tagline} onChange={(v) => { const next = [...draft.services]; next[i] = { ...next[i], tagline: v }; setDraft({ ...draft, services: next }); }} />
+          <Field label="Description" value={svc.desc} onChange={(v) => { const next = [...draft.services]; next[i] = { ...next[i], desc: v }; setDraft({ ...draft, services: next }); }} multiline />
           <div className="flex flex-col gap-1">
             <label className="text-xs uppercase tracking-widest text-[#B88A44] font-semibold">Deliverables (one per line)</label>
-            <textarea
-              rows={5}
-              value={svc.deliverables.join('\n')}
-              onChange={(e) => {
-                const next = [...draft.services];
-                next[i] = { ...next[i], deliverables: e.target.value.split('\n') };
-                setDraft({ ...draft, services: next });
-              }}
-              className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44] resize-y"
-            />
+            <textarea rows={5} value={svc.deliverables.join('\n')} onChange={(e) => { const next = [...draft.services]; next[i] = { ...next[i], deliverables: e.target.value.split('\n') }; setDraft({ ...draft, services: next }); }} className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44] resize-y" />
           </div>
         </Section>
       ))}
@@ -178,12 +157,7 @@ const ProcessTab = ({ draft, setDraft }: { draft: SiteContent; setDraft: (d: Sit
           <Field label="Insight Quote" value={step.insight} onChange={(v) => { const next = [...draft.process]; next[i] = { ...next[i], insight: v }; setDraft({ ...draft, process: next }); }} multiline />
           <div className="flex flex-col gap-1">
             <label className="text-xs uppercase tracking-widest text-[#B88A44] font-semibold">Deliverables (one per line)</label>
-            <textarea
-              rows={5}
-              value={step.deliverables.join('\n')}
-              onChange={(e) => { const next = [...draft.process]; next[i] = { ...next[i], deliverables: e.target.value.split('\n') }; setDraft({ ...draft, process: next }); }}
-              className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44] resize-y"
-            />
+            <textarea rows={5} value={step.deliverables.join('\n')} onChange={(e) => { const next = [...draft.process]; next[i] = { ...next[i], deliverables: e.target.value.split('\n') }; setDraft({ ...draft, process: next }); }} className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44] resize-y" />
           </div>
         </Section>
       ))}
@@ -210,30 +184,8 @@ const WorkTab = ({ draft, setDraft }: { draft: SiteContent; setDraft: (d: SiteCo
             <div className="flex flex-col gap-2">
               {proj.results.map((r, j) => (
                 <div key={j} className="grid grid-cols-2 gap-2">
-                  <input
-                    value={r.label}
-                    onChange={(e) => {
-                      const next = [...draft.work];
-                      const results = [...next[i].results];
-                      results[j] = { ...results[j], label: e.target.value };
-                      next[i] = { ...next[i], results };
-                      setDraft({ ...draft, work: next });
-                    }}
-                    placeholder="Label"
-                    className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]"
-                  />
-                  <input
-                    value={r.value}
-                    onChange={(e) => {
-                      const next = [...draft.work];
-                      const results = [...next[i].results];
-                      results[j] = { ...results[j], value: e.target.value };
-                      next[i] = { ...next[i], results };
-                      setDraft({ ...draft, work: next });
-                    }}
-                    placeholder="Value"
-                    className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]"
-                  />
+                  <input value={r.label} onChange={(e) => { const next = [...draft.work]; const results = [...next[i].results]; results[j] = { ...results[j], label: e.target.value }; next[i] = { ...next[i], results }; setDraft({ ...draft, work: next }); }} placeholder="Label" className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]" />
+                  <input value={r.value} onChange={(e) => { const next = [...draft.work]; const results = [...next[i].results]; results[j] = { ...results[j], value: e.target.value }; next[i] = { ...next[i], results }; setDraft({ ...draft, work: next }); }} placeholder="Value" className="bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]" />
                 </div>
               ))}
             </div>
@@ -256,9 +208,7 @@ const InsightsTab = ({ draft, setDraft }: { draft: SiteContent; setDraft: (d: Si
             <Field label="Read Time" value={post.read} onChange={(v) => { const next = [...draft.insights]; next[i] = { ...next[i], read: v }; setDraft({ ...draft, insights: next }); }} />
             <Field label="Category" value={post.category} onChange={(v) => { const next = [...draft.insights]; next[i] = { ...next[i], category: v }; setDraft({ ...draft, insights: next }); }} />
           </div>
-          {i === 0 && (
-            <Field label="Featured Image URL" value={post.imageUrl} onChange={(v) => { const next = [...draft.insights]; next[i] = { ...next[i], imageUrl: v }; setDraft({ ...draft, insights: next }); }} placeholder="https://..." />
-          )}
+          <Field label="Image URL" value={post.imageUrl} onChange={(v) => { const next = [...draft.insights]; next[i] = { ...next[i], imageUrl: v }; setDraft({ ...draft, insights: next }); }} placeholder="https://... or pick from Images tab" />
         </Section>
       ))}
     </div>
@@ -306,9 +256,194 @@ const ContactTab = ({ draft, setDraft }: { draft: SiteContent; setDraft: (d: Sit
   );
 };
 
+/* ── Images Tab ─────────────────────────────────────────── */
+
+const ImagesTab = ({
+  draft,
+  setDraft,
+}: {
+  draft: SiteContent;
+  setDraft: (d: SiteContent) => void;
+}) => {
+  const [images, setImages] = useState<SiteImage[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [copied, setCopied] = useState<number | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const logoRef = useRef<HTMLInputElement>(null);
+
+  const loadImages = () => {
+    fetch('/api/admin/images')
+      .then((r) => r.json())
+      .then((j: { images: SiteImage[] }) => setImages(j.images))
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    loadImages();
+  }, []);
+
+  const handleUpload = async (file: File, label: string) => {
+    setUploading(true);
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('label', label);
+    try {
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+      const json = (await res.json()) as { image: SiteImage };
+      if (label === 'logo') {
+        setDraft({ ...draft, global: { ...draft.global, logoUrl: json.image.url } });
+      }
+      loadImages();
+    } catch {}
+    setUploading(false);
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('Delete this image?')) return;
+    await fetch(`/api/admin/images/${id}`, { method: 'DELETE' });
+    if (images.find((img) => img.id === id)?.url === draft.global.logoUrl) {
+      setDraft({ ...draft, global: { ...draft.global, logoUrl: '' } });
+    }
+    loadImages();
+  };
+
+  const copyUrl = (id: number, url: string) => {
+    navigator.clipboard.writeText(url).catch(() => {});
+    setCopied(id);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const setAsLogo = (url: string) => {
+    setDraft({ ...draft, global: { ...draft.global, logoUrl: url } });
+  };
+
+  const currentLogo = draft.global.logoUrl;
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Logo Section */}
+      <div className="border border-white/10 rounded-xl overflow-hidden">
+        <div className="px-5 py-4 bg-white/5 flex items-center gap-3">
+          <Star size={16} className="text-[#B88A44]" />
+          <span className="font-serif text-[#F6F1E8] text-lg">Site Logo</span>
+        </div>
+        <div className="px-5 py-5 flex flex-col gap-4">
+          <p className="text-white/40 text-sm">Upload a logo image to replace the text "Overtime Tea" in the navbar. Leave blank to keep the text logo.</p>
+          <div className="flex items-center gap-4">
+            {currentLogo ? (
+              <div className="relative group">
+                <img src={currentLogo} alt="Logo" className="h-14 rounded-lg border border-white/20 bg-white/5 object-contain px-2" />
+                <button
+                  onClick={() => setDraft({ ...draft, global: { ...draft.global, logoUrl: '' } })}
+                  className="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <Trash2 size={10} className="text-white" />
+                </button>
+              </div>
+            ) : (
+              <div className="h-14 w-32 rounded-lg border border-dashed border-white/20 flex items-center justify-center text-white/30 text-xs">
+                No logo set
+              </div>
+            )}
+            <input ref={logoRef} type="file" accept="image/*" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(f, 'logo'); e.target.value = ''; }} />
+            <button
+              onClick={() => logoRef.current?.click()}
+              disabled={uploading}
+              className="flex items-center gap-2 px-4 py-2 border border-[#B88A44] text-[#B88A44] rounded-lg text-sm hover:bg-[#B88A44] hover:text-black transition-all"
+            >
+              <Upload size={14} />
+              {uploading ? 'Uploading…' : 'Upload Logo'}
+            </button>
+          </div>
+          <Field label="Or paste logo URL directly" value={currentLogo} onChange={(v) => setDraft({ ...draft, global: { ...draft.global, logoUrl: v } })} placeholder="https://..." />
+        </div>
+      </div>
+
+      {/* Image Library */}
+      <div className="border border-white/10 rounded-xl overflow-hidden">
+        <div className="px-5 py-4 bg-white/5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <ImageIcon size={16} className="text-[#B88A44]" />
+            <span className="font-serif text-[#F6F1E8] text-lg">Image Library</span>
+            <span className="text-white/30 text-sm">({images.length} files)</span>
+          </div>
+          <div>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(f, 'general'); e.target.value = ''; }} />
+            <button
+              onClick={() => fileRef.current?.click()}
+              disabled={uploading}
+              className="flex items-center gap-2 px-4 py-2 bg-[#B88A44] text-black rounded-lg text-sm font-semibold hover:bg-[#a67b3b] transition-colors"
+            >
+              <Upload size={14} />
+              {uploading ? 'Uploading…' : 'Upload Image'}
+            </button>
+          </div>
+        </div>
+        <div className="px-5 py-5">
+          {images.length === 0 ? (
+            <div className="text-center py-12 text-white/30">
+              <ImageIcon size={40} className="mx-auto mb-3 opacity-30" />
+              <p className="text-sm">No images uploaded yet.</p>
+              <p className="text-xs mt-1">Upload images to use them across the site.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {images.map((img) => {
+                const isLogo = img.url === currentLogo;
+                return (
+                  <div key={img.id} className={`relative group rounded-xl overflow-hidden border transition-all ${isLogo ? 'border-[#B88A44]' : 'border-white/10 hover:border-white/30'}`}>
+                    <div className="aspect-square bg-white/5 flex items-center justify-center overflow-hidden">
+                      <img src={img.url} alt={img.originalName} className="w-full h-full object-cover" />
+                    </div>
+                    {isLogo && (
+                      <div className="absolute top-1 left-1 bg-[#B88A44] text-black text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Star size={8} /> LOGO
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-2">
+                      <p className="text-white text-[10px] text-center truncate w-full px-1">{img.originalName}</p>
+                      <div className="flex gap-1 flex-wrap justify-center">
+                        <button
+                          onClick={() => copyUrl(img.id, img.url)}
+                          title="Copy URL"
+                          className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        >
+                          {copied === img.id ? <Check size={13} /> : <Copy size={13} />}
+                        </button>
+                        <button
+                          onClick={() => setAsLogo(img.url)}
+                          title="Set as Logo"
+                          className={`p-1.5 rounded-lg transition-colors text-white ${isLogo ? 'bg-[#B88A44]' : 'bg-white/10 hover:bg-[#B88A44]/60'}`}
+                        >
+                          <Star size={13} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(img.id)}
+                          title="Delete"
+                          className="p-1.5 rounded-lg bg-white/10 hover:bg-red-500/60 text-white transition-colors"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <p className="text-white/30 text-xs text-center">
+        Tip: After uploading, use "Copy URL" to paste image URLs into any content field.
+      </p>
+    </div>
+  );
+};
+
 /* ── Main Admin component ───────────────────────────────── */
 
-const TABS = ['Global', 'Home', 'Services', 'Process', 'Work', 'Insights', 'Contact'] as const;
+const TABS = ['Global', 'Home', 'Services', 'Process', 'Work', 'Insights', 'Contact', 'Images'] as const;
 type Tab = typeof TABS[number];
 
 export default function Admin() {
@@ -322,6 +457,11 @@ export default function Admin() {
   const [activeTab, setActiveTab] = useState<Tab>('Global');
   const [draft, setDraft] = useState<SiteContent>(content);
   const [saved, setSaved] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  useEffect(() => {
+    if (loggedIn) setDraft(content);
+  }, [content, loggedIn]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -334,8 +474,8 @@ export default function Admin() {
     }
   };
 
-  const handleSave = () => {
-    updateContent(draft);
+  const handleSave = async () => {
+    await updateContent(draft);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -373,7 +513,7 @@ export default function Admin() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="admin"
-                  className="w-full bg-[#1e1e1e] border border-white/10 rounded-lg pl-9 pr-4 py-3 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]"
+                  className="w-full bg-[#1e1e1e] border border-white/10 rounded-lg pl-9 py-3 text-[#F6F1E8] text-sm focus:outline-none focus:border-[#B88A44]"
                 />
               </div>
             </div>
@@ -395,14 +535,9 @@ export default function Admin() {
               </div>
             </div>
 
-            {loginError && (
-              <p className="text-red-400 text-sm text-center">{loginError}</p>
-            )}
+            {loginError && <p className="text-red-400 text-sm text-center">{loginError}</p>}
 
-            <button
-              type="submit"
-              className="mt-2 py-3 bg-[#B88A44] text-[#121212] rounded-lg font-semibold tracking-wide hover:bg-[#a67b3b] transition-colors"
-            >
+            <button type="submit" className="mt-2 py-3 bg-[#B88A44] text-[#121212] rounded-lg font-semibold tracking-wide hover:bg-[#a67b3b] transition-colors">
               Sign In
             </button>
           </form>
@@ -424,47 +559,72 @@ export default function Admin() {
     Work: <WorkTab draft={draft} setDraft={setDraft} />,
     Insights: <InsightsTab draft={draft} setDraft={setDraft} />,
     Contact: <ContactTab draft={draft} setDraft={setDraft} />,
+    Images: <ImagesTab draft={draft} setDraft={setDraft} />,
   };
 
   return (
     <div className="min-h-screen bg-[#0c0c0c] text-[#F6F1E8]">
       {/* Top bar */}
-      <header className="sticky top-0 z-50 bg-[#111]/90 backdrop-blur border-b border-white/10 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-[#B88A44] text-xs uppercase tracking-widest font-semibold">Admin</span>
-          <span className="text-white/20">·</span>
-          <span className="font-serif text-lg text-[#F6F1E8]">Overtime Tea CMS</span>
+      <header className="sticky top-0 z-50 bg-[#111]/90 backdrop-blur border-b border-white/10 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <button
+            className="md:hidden p-1.5 rounded-lg border border-white/10 text-white/50 hover:text-white/80"
+            onClick={() => setMobileNavOpen((o) => !o)}
+          >
+            <ChevronDown size={16} className={`transition-transform ${mobileNavOpen ? 'rotate-180' : ''}`} />
+          </button>
+          <span className="text-[#B88A44] text-xs uppercase tracking-widest font-semibold hidden sm:inline">Admin</span>
+          <span className="text-white/20 hidden sm:inline">·</span>
+          <span className="font-serif text-sm md:text-lg text-[#F6F1E8] truncate">Overtime Tea CMS</span>
         </div>
-        <div className="flex items-center gap-3">
-          <a href="/" target="_blank" rel="noopener noreferrer" className="text-xs text-white/40 hover:text-white/70 transition-colors flex items-center gap-1">
+        <div className="flex items-center gap-2">
+          <a href="/" target="_blank" rel="noopener noreferrer" className="hidden md:flex text-xs text-white/40 hover:text-white/70 transition-colors items-center gap-1">
             View Site ↗
           </a>
-          <button
-            onClick={handleReset}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 text-sm transition-all"
-          >
+          <button onClick={handleReset} className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 text-sm transition-all">
             <RotateCcw size={14} />
             Reset
           </button>
           <button
             onClick={handleSave}
-            className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-all ${saved ? 'bg-green-600 text-white' : 'bg-[#B88A44] text-[#121212] hover:bg-[#a67b3b]'}`}
+            className={`flex items-center gap-2 px-3 md:px-5 py-2 rounded-lg text-sm font-semibold transition-all ${saved ? 'bg-green-600 text-white' : 'bg-[#B88A44] text-[#121212] hover:bg-[#a67b3b]'}`}
           >
             <Save size={14} />
-            {saved ? 'Saved!' : 'Save Changes'}
+            <span className="hidden sm:inline">{saved ? 'Saved!' : 'Save Changes'}</span>
           </button>
-          <button
-            onClick={() => setLoggedIn(false)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 text-sm transition-all"
-          >
+          <button onClick={() => setLoggedIn(false)} className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 text-sm transition-all">
             <LogOut size={14} />
           </button>
         </div>
       </header>
 
+      {/* Mobile nav dropdown */}
+      <AnimatePresence>
+        {mobileNavOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden overflow-hidden bg-[#111] border-b border-white/10"
+          >
+            <div className="p-3 grid grid-cols-4 gap-2">
+              {TABS.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setActiveTab(tab); setMobileNavOpen(false); }}
+                  className={`text-center py-2 px-1 rounded-lg text-xs transition-colors ${activeTab === tab ? 'bg-[#B88A44]/20 text-[#B88A44]' : 'text-white/50 hover:text-white/80'}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-52 shrink-0 border-r border-white/10 h-[calc(100vh-65px)] sticky top-[65px] pt-6 flex flex-col">
+        {/* Sidebar — desktop only */}
+        <aside className="hidden md:flex w-52 shrink-0 border-r border-white/10 h-[calc(100vh-65px)] sticky top-[65px] pt-6 flex-col">
           {TABS.map((tab) => (
             <button
               key={tab}
@@ -477,8 +637,8 @@ export default function Admin() {
         </aside>
 
         {/* Content */}
-        <main className="flex-1 px-8 py-8 max-w-4xl">
-          <h2 className="font-serif text-2xl text-[#F6F1E8] mb-2">{activeTab}</h2>
+        <main className="flex-1 px-4 md:px-8 py-6 md:py-8 max-w-4xl overflow-x-hidden">
+          <h2 className="font-serif text-xl md:text-2xl text-[#F6F1E8] mb-2">{activeTab}</h2>
           <p className="text-white/30 text-sm mb-6">
             Edit content below, then click <strong className="text-[#B88A44]">Save Changes</strong> to publish to the site.
           </p>

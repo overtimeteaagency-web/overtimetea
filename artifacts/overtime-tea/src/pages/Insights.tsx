@@ -21,10 +21,10 @@ const Insights = () => {
         description="Insights, perspectives, and creative thinking from the Overtime Tea team on social media, branding, and the art of meaningful content." 
       />
 
-      <section className="pt-40 pb-20 px-6 border-b border-black/10">
+      <section className="pt-28 md:pt-40 pb-12 md:pb-20 px-4 md:px-6 border-b border-black/10">
         <div className="container mx-auto">
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 text-[#121212]"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 text-[#121212]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}

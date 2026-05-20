@@ -338,7 +338,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="bg-[#121212] min-h-screen text-[#F6F1E8]"
+          className="bg-[#121212] min-h-screen text-[#F6F1E8] overflow-x-hidden"
         >
           <SEO
             title="Overtime Tea — Brewed Overtime for Better Conversations"
@@ -361,11 +361,11 @@ const Home = () => {
 
             <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
-                <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-serif font-bold text-[#F6F1E8] leading-[1.1] mb-8 max-w-6xl mx-auto">
-                  {h.heroLine1} <br className="hidden md:block" />
+                <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] font-serif font-bold text-[#F6F1E8] leading-[1.1] mb-6 md:mb-8 max-w-6xl mx-auto">
+                  {h.heroLine1} <br className="hidden sm:block" />
                   <span className="italic font-light text-[#B88A44]">{h.heroLine2}</span>
                 </h1>
-                <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                <p className="text-base sm:text-xl md:text-2xl text-white/70 max-w-2xl mx-auto mb-8 md:mb-12 font-light leading-relaxed px-2">
                   {h.heroTagline}
                 </p>
               </motion.div>
@@ -376,11 +376,11 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.6 }}
               >
-                <Link href="/contact" className="px-10 py-5 bg-[#B88A44] text-white rounded-full font-medium tracking-wide hover:bg-white hover:text-[#121212] transition-colors duration-300 flex items-center gap-2 group text-lg">
+                <Link href="/contact" className="px-7 sm:px-10 py-4 sm:py-5 bg-[#B88A44] text-white rounded-full font-medium tracking-wide hover:bg-white hover:text-[#121212] transition-colors duration-300 flex items-center gap-2 group text-base sm:text-lg">
                   {h.heroCta}
-                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link href="/services" className="px-10 py-5 border border-white/20 text-white rounded-full font-medium tracking-wide hover:border-white transition-all duration-300 text-lg">
+                <Link href="/services" className="px-7 sm:px-10 py-4 sm:py-5 border border-white/20 text-white rounded-full font-medium tracking-wide hover:border-white transition-all duration-300 text-base sm:text-lg">
                   See What We're Brewing
                 </Link>
               </motion.div>
@@ -388,8 +388,8 @@ const Home = () => {
           </section>
 
           {/* ── Stats Bar ─────────────────────────────────── */}
-          <div className="bg-[#B88A44] text-[#121212] py-8 border-y border-white/10">
-            <div className="container mx-auto px-6 flex flex-wrap justify-between items-center gap-8 font-serif text-2xl md:text-3xl font-bold">
+          <div className="bg-[#B88A44] text-[#121212] py-6 md:py-8 border-y border-white/10">
+            <div className="container mx-auto px-4 md:px-6 grid grid-cols-2 md:flex md:flex-wrap md:justify-between items-center gap-4 md:gap-8 font-serif text-lg sm:text-xl md:text-3xl font-bold">
               <div><AnimatedCounter to={parseInt(h.stat1Number) || 50} />+ {h.stat1Label}</div>
               <div><AnimatedCounter to={parseInt(h.stat2Number) || 3} />x Avg Engagement Lift</div>
               <div><AnimatedCounter to={parseInt(h.stat3Number) || 100} />% {h.stat3Label}</div>
@@ -398,7 +398,7 @@ const Home = () => {
           </div>
 
           {/* ── Our Expertise + Instagram Mockup ─────────── */}
-          <section className="py-32 px-6">
+          <section className="py-16 md:py-32 px-4 md:px-6 overflow-x-hidden">
             <div className="container mx-auto">
               <div className="text-center mb-20">
                 <motion.p
@@ -479,7 +479,7 @@ const Home = () => {
           </section>
 
           {/* ── The Overtime Method ───────────────────────── */}
-          <section className="py-32 px-6 bg-[#F6F1E8] text-[#121212]">
+          <section className="py-16 md:py-32 px-4 md:px-6 bg-[#F6F1E8] text-[#121212] overflow-x-hidden">
             <div className="container mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                 <div>
@@ -500,7 +500,7 @@ const Home = () => {
               </div>
 
               {/* Steps grid */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-0 border border-black/10 rounded-2xl overflow-hidden">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0 border border-black/10 rounded-2xl overflow-hidden">
                 {methodSteps.map((step, i) => (
                   <motion.div
                     key={step.name}
@@ -609,7 +609,7 @@ const Home = () => {
           </section>
 
           {/* ── Final CTA ─────────────────────────────────── */}
-          <section className="relative py-40 px-6 bg-[#B88A44] text-[#121212] text-center overflow-hidden">
+          <section className="relative py-20 md:py-40 px-4 md:px-6 bg-[#B88A44] text-[#121212] text-center overflow-hidden">
             {/* Decorative animated rings */}
             {[1, 2, 3].map((r) => (
               <motion.div
@@ -646,7 +646,7 @@ const Home = () => {
                 Ready to Begin?
               </motion.p>
               <motion.h2
-                className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight"
+                className="text-4xl sm:text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -672,7 +672,7 @@ const Home = () => {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 px-14 py-6 bg-[#121212] text-white rounded-full font-medium tracking-wide hover:bg-white hover:text-[#121212] transition-all duration-400 text-xl group"
+                  className="inline-flex items-center gap-3 px-8 sm:px-14 py-4 sm:py-6 bg-[#121212] text-white rounded-full font-medium tracking-wide hover:bg-white hover:text-[#121212] transition-all duration-400 text-base sm:text-xl group"
                 >
                   Start A Conversation
                   <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform duration-300" />

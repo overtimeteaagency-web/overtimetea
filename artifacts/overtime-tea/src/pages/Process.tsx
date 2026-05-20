@@ -278,8 +278,8 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
         {step.num}
       </span>
 
-      <div className="container mx-auto px-6 py-24 z-10">
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+      <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 z-10">
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center ${!isEven ? 'lg:[&>*:first-child]:order-2' : ''}`}>
           {/* Text side */}
           <motion.div
             initial={{ opacity: 0, x: isEven ? -40 : 40 }}
@@ -310,7 +310,7 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
               {step.tagline}
             </p>
 
-            <p className="text-white/50 text-lg leading-relaxed mb-10 max-w-lg">
+            <p className="text-white/50 text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-lg">
               {step.desc}
             </p>
 
@@ -482,7 +482,7 @@ const Process = () => {
     ))}
 
     {/* RIO section */}
-    <section className="py-32 px-6 relative overflow-hidden" style={{ background: '#F6F1E8' }}>
+    <section className="py-16 md:py-32 px-4 md:px-6 relative overflow-hidden" style={{ background: '#F6F1E8' }}>
       <div className="container mx-auto max-w-5xl text-center relative z-10">
         <motion.p
           className="text-[#B88A44] text-sm uppercase tracking-[0.4em] mb-6 font-medium"

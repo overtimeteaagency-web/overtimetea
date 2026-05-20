@@ -441,7 +441,7 @@ function ConversationPanel({ conv }: { conv: Conversation }) {
       </div>
 
       {/* Messages */}
-      <div className="p-5 max-h-[400px] overflow-y-auto bg-white">
+      <div className="p-4 md:p-5 max-h-[280px] sm:max-h-[350px] md:max-h-[400px] overflow-y-auto bg-white overscroll-contain">
         {isDM
           ? conv.messages.map((msg, i) => (
               <MessageBubble key={i} msg={msg} isOT={msg.from === 'ot'} />
@@ -615,7 +615,7 @@ const Work = () => {
       />
 
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 bg-[#121212] text-[#F6F1E8]">
+      <section className="pt-28 md:pt-40 pb-12 md:pb-20 px-4 md:px-6 bg-[#121212] text-[#F6F1E8]">
         <div className="container mx-auto">
           <motion.p
             className="text-[#B88A44] text-sm uppercase tracking-[0.3em] mb-4 font-medium"
@@ -626,7 +626,7 @@ const Work = () => {
             Case Studies
           </motion.p>
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -666,10 +666,10 @@ const Work = () => {
       </section>
 
       {/* Project grid */}
-      <section className="py-20 px-6">
+      <section className="py-12 md:py-20 px-4 md:px-6">
         <div className="container mx-auto">
-          <p className="text-center text-gray-400 text-xs uppercase tracking-widest mb-12">Click any conversation to see what happened inside</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="text-center text-gray-400 text-xs uppercase tracking-widest mb-8 md:mb-12">Click any conversation to see what happened inside</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {mergedProjects.map((project, i) => (
               <motion.div
                 key={project.name}
