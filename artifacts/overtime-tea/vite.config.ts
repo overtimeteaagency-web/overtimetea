@@ -1,75 +1,82 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-const rawPort = process.env.PORT;
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
 
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
+  const rootDir = __dirname;
 
-const port = Number(rawPort);
+  return {
+    base: env.BASE_PATH || "/",
 
-if (Number.isNaN(port) || port <= 0) {
-  throw new Error(`Invalid PORT value: "${rawPort}"`);
-}
+    plugins: [
+      react(),
+      tailwindcss()
+    ],
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    "BASE_PATH environment variable is required but was not provided.",
-  );
-}
-
-export default defineConfig({
-  base: basePath,
-  plugins: [
-    react(),
-    tailwindcss(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer({
-              root: path.resolve(import.meta.dirname, ".."),
-            }),
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
-        ]
-      : []),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "src"),
-      "@assets": path.resolve(import.meta.dirname, "..", "..", "attached_assets"),
+    resolve: {
+      alias: {
+        "@": path.resolve(rootDir, "src"),
+        "@assets": path.resolve(rootDir, "..", "..", "attached_assets"),
+      },
+      dedupe: ["react", "react-dom"],
     },
-    dedupe: ["react", "react-dom"],
-  },
-  root: path.resolve(import.meta.dirname),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    port,
-    strictPort: true,
-    host: "0.0.0.0",
-    allowedHosts: true,
-    fs: {
-      strict: true,
+
+    root: rootDir,
+
+    css: {
+      transformer: "postcss",
     },
-  },
-  preview: {
-    port,
-    host: "0.0.0.0",
-    allowedHosts: true,
-  },
+
+    build: {
+      outDir: path.resolve(rootDir, "dist/public"),
+      emptyOutDir: true,
+      sourcemap: false,
+
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+
+              if (id.includes("react")) {
+                return "vendor";
+              }
+
+              if (id.includes("@radix-ui")) {
+                return "radix";
+              }
+
+              if (id.includes("@tanstack")) {
+                return "react-query";
+              }
+
+              if (id.includes("framer-motion")) {
+                return "motion";
+              }
+
+              if (id.includes("recharts")) {
+                return "charts";
+              }
+
+              return "libs";
+            }
+          }
+        }
+      },
+
+      chunkSizeWarningLimit: 1000
+    },
+
+    server: {
+      port: Number(env.PORT) || 5173,
+      host: "0.0.0.0",
+    },
+
+    preview: {
+      port: Number(env.PORT) || 5173,
+      host: "0.0.0.0",
+    },
+  };
 });
