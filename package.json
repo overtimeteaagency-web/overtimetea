@@ -11,7 +11,9 @@
     "dev:web": "node scripts/with-env.mjs -- pnpm --filter @workspace/overtime-tea run dev",
     "dev:api": "node scripts/with-env.mjs -- sh -c \"PORT=8080 pnpm --filter @workspace/api-server run dev\"",
     "db:push": "node scripts/with-env.mjs -- pnpm --filter @workspace/db run push",
-    "db:push:force": "node scripts/with-env.mjs -- pnpm --filter @workspace/db run push-force"
+    "db:push:force": "node scripts/with-env.mjs -- pnpm --filter @workspace/db run push-force",
+    "build:api": "pnpm --filter @workspace/api-server run build",
+    "start:api": "node --enable-source-maps artifacts/api-server/dist/index.mjs"
   },
   "private": true,
   "devDependencies": {
