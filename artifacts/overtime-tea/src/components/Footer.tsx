@@ -16,7 +16,7 @@ export const Footer = () => {
                 <img src={logoUrl} alt={brandName} className="h-8 md:h-10 w-auto object-contain max-w-[160px]" />
               ) : (
                 <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider">
-                  {brandName} <span className="text-[#B88A44]">☕</span>
+                  {brandName} <span className="text-[#B88A44]"></span>
                 </span>
               )}
             </Link>
