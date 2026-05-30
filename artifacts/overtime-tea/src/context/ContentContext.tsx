@@ -290,21 +290,38 @@ export const defaultContent: SiteContent = {
 
 /* ── Deep merge helper ──────────────────────────────────── */
 
-function deepMerge<T>(defaults: T, overrides: Partial<T>): T {
-  if (typeof defaults !== 'object' || defaults === null) return (overrides ?? defaults) as T;
+function deepMergeRecord(
+  defaults: Record<string, unknown>,
+  overrides: Record<string, unknown>,
+): Record<string, unknown> {
   const result = { ...defaults };
-  for (const key in overrides) {
-    const k = key as keyof T;
-    const ov = overrides[k];
-    if (ov !== undefined && ov !== null) {
-      if (typeof defaults[k] === 'object' && !Array.isArray(defaults[k]) && typeof ov === 'object' && !Array.isArray(ov)) {
-        result[k] = deepMerge(defaults[k] as object, ov as object) as T[typeof k];
-      } else {
-        result[k] = ov as T[typeof k];
-      }
+  for (const key of Object.keys(overrides)) {
+    const ov = overrides[key];
+    if (ov === undefined || ov === null) continue;
+    const defVal = defaults[key];
+    if (
+      typeof defVal === 'object' &&
+      defVal !== null &&
+      !Array.isArray(defVal) &&
+      typeof ov === 'object' &&
+      !Array.isArray(ov)
+    ) {
+      result[key] = deepMergeRecord(
+        defVal as Record<string, unknown>,
+        ov as Record<string, unknown>,
+      );
+    } else {
+      result[key] = ov;
     }
   }
   return result;
+}
+
+function deepMerge(defaults: SiteContent, overrides: Partial<SiteContent>): SiteContent {
+  return deepMergeRecord(
+    defaults as unknown as Record<string, unknown>,
+    overrides as unknown as Record<string, unknown>,
+  ) as unknown as SiteContent;
 }
 
 /* ── Context ────────────────────────────────────────────── */

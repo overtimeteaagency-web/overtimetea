@@ -1,0 +1,6 @@
+{
+  "installCommand": "npx --yes pnpm@10.12.1 install --frozen-lockfile",
+  "buildCommand": "npx --yes pnpm@10.12.1 --filter @workspace/overtime-tea run build",
+  "outputDirectory": "artifacts/overtime-tea/dist/public",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
