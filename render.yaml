@@ -7,12 +7,12 @@ services:
     runtime: node
     plan: free
     rootDir: .
+    # Do not use corepack on Render — /usr/bin is read-only (EROFS)
     buildCommand: >-
-      corepack enable &&
-      corepack prepare pnpm@10.12.1 --activate &&
-      pnpm install &&
+      npm install -g pnpm@10.12.1 &&
+      pnpm install --frozen-lockfile &&
       pnpm run build:api
-    startCommand: pnpm run start:api
+    startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
     healthCheckPath: /api/healthz
     envVars:
       - key: NODE_ENV
